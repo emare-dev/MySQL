@@ -189,8 +189,8 @@ Using now:
 
 <br>
 
-CHAR â†’ fixed-size values
-VARCHAR â†’ variable-length text (used most of the time)
+CHAR       fixed-size values
+VARCHAR    variable-length text (used most of the time)
 
 <br>
 
@@ -217,37 +217,43 @@ VARCHAR(10)  â†’ "cat" stored as "cat"
 
 MySQL doesn't care about new lines, can be in one line.
 
+```bash
     CREATE TABLE <tablename>
     (
         column_name data_type,
         column_name data_type,
     );
+```
 
-<br>
-
+```bash
     CREATE TABLE cats
     (
         name varchar(100),
         age INT,
     );
+```
 
 What it shows in Terminal:
 
+```bash
     mysql> CREATE TABLE cats (
         -> name VARCHAR(50),
         -> age INT
         -> );
     Query OK, 0 rows affected (0.04 sec)
+```
 
 <br>
 
 Check the created tables:
 
+```bash
     SHOW tables;
 
     // shows the same
     SHOW COLUMNS FROM cats;
     DESC cats;
+```
 
 <br>
 
@@ -260,3 +266,50 @@ To drop a table:
 To specifically drop the `cats` table:
 
     DROP TABLE cats;
+
+<br>
+
+## INSERTING DATA
+
+Re-create the `cats` table:
+
+```bash
+CREATE TABLE cats (
+    name VARCHAR(50),
+    age INT
+);
+```
+
+### Insert
+
+Insert a cat in one line or in various lines.
+**The order matters** when you state which values you will add.
+
+```bash
+INSERT INTO cats (name, age) VALUES ('Blue Steele', 5);
+
+INSERT INTO cats (name, age) 
+VALUES           ('Jenkins',
+                 7);
+```
+
+### Multi-inserts
+
+```bash
+INSERT INTO cats (name, age) 
+VALUES 
+  ('Meatball', 5), 
+  ('Turkey', 1), 
+  ('Potato Face', 15);
+```
+
+<br>
+
+### Select
+
+See if the inserted values are in the table.
+`*` shows everything in the table.
+
+```bash
+SELECT * FROM cats;
+```
