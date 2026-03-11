@@ -313,3 +313,74 @@ See if the inserted values are in the table.
 ```bash
 SELECT * FROM cats;
 ```
+
+### Using NOT NULL
+
+```
+DESC cats;
+
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(50) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+```
+
+
+- `NULL: yes` in the table means `null` is permited.
+- in SQL `null` means _no value_ / no information
+
+```
+INSERT INTO cats (name) VALUES ('Bingo');
+
++--------+------+
+| name   | age  |
++--------+------+
+| Damien |    5 |
+| Bach   |    1 |
+| Timmy  |   10 |
+| Julia  |    3 |
+| Honey  |    6 |
+| Bingo  | NULL | a valid row with no info about the cat's age
++--------+------+
+```
+
+<br>
+
+```
+INSERT INTO cats() VALUES();
+
++--------+------+
+| name   | age  |
++--------+------+
+| Damien |    5 |
+| Bach   |    1 |
+| Timmy  |   10 |
+| Julia  |    3 |
+| Honey  |    6 |
+| Bingo  | NULL | valid row
+| NULL   | NULL | valid row, but we don't want to do this
++--------+------+
+```
+<br>
+
+To prevent from being able to not enter the information, this is how we create the table.
+
+```bash
+CREATE TABLE dogs (
+    name VARCHAR(50) NOT NULL,
+    age INT NOT NULL
+);
+```
+
+```
+DESC dogs;
+
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(50) | NO   |     | NULL    |       |
+| age   | int         | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+```
