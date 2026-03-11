@@ -109,6 +109,18 @@ Clear screen:
 
     ctrl L
 
+### Quotations
+
+Good practice to use `'single quotes'` for text because `"double quotes"` give errors in some SQL variants.
+
+Use **escaping** for quote inside a quote.
+
+        INSERT INTO shop(name) VALUES ('Mario\'s pizza');
+
+This will pass:
+
+        INSERT INTO shop(name) VALUES ('She said "haha"');
+<br>
 
 ### Creating database
 
