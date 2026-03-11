@@ -396,3 +396,96 @@ DESC dogs;
 | age   | int         | NO   |     | NULL    |       |
 +-------+-------------+------+-----+---------+-------+
 ```
+
+<br>
+
+### Adding DEFAULT Values
+
+
+In previous table, there is **no default value**.
+
+Define a table with a `DEFAULT` name specified:
+
+```bash
+CREATE TABLE birds (
+    -> name VARCHAR(50) DEFAULT 'unknown',
+    -> age INT DEFAULT 0
+    -> );
+```
+
+Notice the change when you describe the table:
+
+```
+DESC birds;
+
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(50) | YES  |     | unknown |       |
+| age   | int         | YES  |     | 0       |       |
++-------+-------------+------+-----+---------+-------+
+```
+
+Insert a bird without a name:
+
+```
+INSERT INTO birds(age) VALUES(13);
+
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(50) | YES  |     | unknown |       |
+| age   | int         | YES  |     | 0       |       |
++-------+-------------+------+-----+---------+-------+
+```
+
+Or a nameless, ageless cat:
+
+    INSERT INTO birds() VALUES();
+
+<br>
+
+#### Combine `NOT NULL` and `DEFAULT`
+
+They are separate.
+If only `default` is set, and there is no `not null`, the `null` can be set manually.
+
+
+    INSERT INTO birds(name, age) VALUES(NULL, NULL);
+
+```
+SELECT * FROM birds;
+
++---------+------+
+| name    | age  |
++---------+------+
+| unknown |    3 |
+| unknown |    0 |
+| NULL    | NULL |
++---------+------+
+```
+
+```bash
+CREATE TABLE fishes  (    
+    name VARCHAR(20) NOT NULL DEFAULT 'unnamed',    
+    age INT NOT NULL DEFAULT 99 
+);
+```
+
+```
+SELECT * FROM fishes;
+
+Empty set (0.00 sec)
+```
+
+    INSERT INTO fishes() VALUES();
+
+```
+SELECT * FROM fishes;
+
++---------+-----+
+| name    | age |
++---------+-----+
+| unnamed |  99 |
++---------+-----+
+```
