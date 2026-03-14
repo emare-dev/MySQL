@@ -7,6 +7,37 @@
 
 [See types of databases](https://www.geeksforgeeks.org/dbms/types-of-databases/).
 
+## Basic comands
+
+```bash
+CREATE DATABASE <database>;   -- Creates a new database
+
+SHOW DATABASES;                -- Lists all databases available on the MySQL server
+
+USE <database>;               -- Sets specific database as the active database for the session
+
+SELECT DATABASE();             -- Displays the name of the currently selected database
+
+DROP DATABASE database;   -- Permanently deletes the specified database and all its tables
+```
+
+<br>
+
+```bash
+SHOW TABLES;                 -- Lists all tables in the currently selected database
+
+SHOW COLUMNS FROM <table>;   -- Displays the column names, types, and attributes of the specified table
+
+DESC <table>;                -- Shows the structure of the table (shortcut for SHOW COLUMNS)
+
+SELECT * FROM <table>;       -- Retrieves all rows and columns from the specified table
+
+DROP TABLE <table>;          -- Permanently deletes the specified table and all its data
+```
+
+
+<br>
+
 ### Database naming conventions
 
 Yes:
@@ -488,4 +519,74 @@ SELECT * FROM fishes;
 +---------+-----+
 | unnamed |  99 |
 +---------+-----+
+```
+<br>
+
+### Introducing Primary Keys
+
+Unique IDs are added to rows so we can differentiate them for every made table = **primary key**.
+
+One way of specifying a PRIMARY KEY
+
+```bash
+CREATE TABLE unique_cats (
+	cat_id INT NOT NUL PRIMARY KEY, # has to be there, has to be unique
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL
+);
+
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| cat_id | int         | NO   | PRI | NULL    |       |
+| name   | varchar(50) | NO   |     | NULL    |       |
+| age    | int         | NO   |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+```
+
+Another option:
+
+```bash
+CREATE TABLE unique_dogs (
+	dog_id INT,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    PRIMARY KEY (dog_id)
+);
+```
+
+<br>
+
+### Auto increment
+
+- use `AUTO_INCREMENT`
+- starts at `1`
+
+```bash
+CREATE TABLE unique_cats3 (
+    cat_id INT AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    PRIMARY KEY (cat_id)
+);
+
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| dog_id | int         | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(50) | NO   |     | NULL    |                |
+| age    | int         | NO   |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+
+INSERT INTO unique_dogs(name, age) VALUES('Tina', 7);
+INSERT INTO unique_dogs(name, age) VALUES('Boby', 10);
+
+SELECT * FROM unique_dogs;
+
++--------+------+-----+
+| dog_id | name | age |
++--------+------+-----+
+|      1 | Boby |  10 |
+|      2 | Tina |   7 |
++--------+------+-----+
 ```
