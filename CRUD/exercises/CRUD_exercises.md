@@ -89,3 +89,19 @@ SELECT cat_id, AGE from CATS_NEW where cat_id = age;
 ```
 
 <br>
+
+2. UPDATE
+
+- Change Jackson's name to Jack
+
+    UPDATE cats_new SET name = 'Jack' WHERE name = 'Jackson';
+
+- Change Ringo's breed to "British shorthair"
+
+    UPDATE cats_new SET breed = 'British shorthair' WHERE name = 'Ringo';
+
+- Update 2 Maine Coon's age to 12
+
+    UPDATE cats_new SET age = 12 WHERE breed = 'Maine Coon';
+
+<br>
