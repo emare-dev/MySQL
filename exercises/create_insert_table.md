@@ -20,3 +20,23 @@ CREATE TABLE employees (
     PRIMARY KEY (employee_id)
     );
 ```
+
+A test insert:
+
+```bash
+INSERT INTO employees(first_name, last_name, age)
+VALUES('Johann', 'Sebastian', 30);
+INSERT INTO employees(first_name, last_name, age)
+VALUES('Dora', 'Smith', 58);
+```
+
+How the table looks:
+
+```bash
++-------------+-----------+------------+-------------+-----+----------------+
+| employee_id | last_name | first_name | middle_name | age | current_status |
++-------------+-----------+------------+-------------+-----+----------------+
+|           1 | Sebastian | Johann     | NULL        |  30 | employed       |
+|           2 | Smith     | Dora       | NULL        |  58 | employed       |
++-------------+-----------+------------+-------------+-----+----------------+
+```
