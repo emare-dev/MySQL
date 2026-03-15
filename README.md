@@ -24,6 +24,14 @@ DROP DATABASE database;   -- Permanently deletes the specified database and all 
 <br>
 
 ```bash
+
+CREATE TABLE cats (
+    cat_id INT AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    PRIMARY KEY (cat_id)
+);
+
 SHOW TABLES;                 -- Lists all tables in the currently selected database
 
 SHOW COLUMNS FROM <table>;   -- Displays the column names, types, and attributes of the specified table
