@@ -80,3 +80,75 @@ SELECT * FROM cats WHERE name ='Egg'; -- here it is case insensitive
 ```
 
 <br>
+
+### Aliases
+
+When selecting data, rename a column in the output result to make it shorter/easier to understand.
+
+**It is temporary.**
+
+Used also for results that don't have a name.
+
+Use 'AS' to alias a column in your results (it doesn't actually change the name of the column in the table)
+
+```bash
+-- instead of:
+
+SELECT cat_id, name FROM cats_new;
++--------+----------------+
+| cat_id | name           |
++--------+----------------+
+|      1 | Ringo          |
+|      2 | Cindy          |
+|      3 | Dumbledore     |
+|      4 | Egg            |
+|      5 | Misty          |
+|      6 | George Michael |
+|      7 | Jackson        |
++--------+----------------+
+
+-- use this only for this output, this time only:
+
+SELECT cat_id AS id, name FROM cats;
+
++----+
+| id |
++----+
+|  1 |
+|  2 |
+|  3 |
+|  4 |
+|  5 |
+|  6 |
+|  7 |
++----+
+```
+
+<br><br>
+
+## U - UPDATE
+
+Pair: `UPDATE` ... `SET`
+
+- **what** are we updating
+- **on which rows**
+
+**Rule of thumb**
+
+  ⚠️ SELECT BEFORE UPDATE
+
+<br>
+
+Change tabby cats to shorthair:
+
+    UPDATE cats SET breed='Shorthair' WHERE breed='Tabby';
+
+Another update:
+
+    UPDATE cats SET age=14 WHERE name='Misty';
+
+Update multiple fields at once:
+
+    UPDATE employees SET current_status = 'fired', last_name = 'Doe';
+
+<br>
