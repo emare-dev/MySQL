@@ -152,3 +152,15 @@ Update multiple fields at once:
     UPDATE employees SET current_status = 'fired', last_name = 'Doe';
 
 <br>
+
+## D - DELETE
+
+    DELETE FROM <table> WHERE <condition>;
+
+```bash
+DELETE FROM cats; -- Clears the whole table (deletes all rows in the cats table)
+
+DELETE FROM cats WHERE name='Egg'; -- Delete all cats with name of 'Egg'
+```
+
+<br>

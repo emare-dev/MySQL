@@ -105,3 +105,18 @@ SELECT cat_id, AGE from CATS_NEW where cat_id = age;
     UPDATE cats_new SET age = 12 WHERE breed = 'Maine Coon';
 
 <br>
+
+3. DELETE
+
+- delete all 4 year old cats
+
+    DELETE FROM cats_new WHERE age = 4;
+
+- delete all the cats who's age is the same as their cat_id
+
+    DELETE FROM cats_new WHERE age = cat_id;
+
+- delete all cats (don't drop the table, just empty it out)
+
+    
+
