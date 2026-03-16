@@ -220,6 +220,38 @@ FROM
 
 ## REPLACE
 
+Replaces portions of a string with other (replacement) string.
+
+**Data in database stays the same**, only the displayed data is changed.
+
+It is **case sensitive**.
+
+        1. string we are operating on
+        2. what we want to replace
+        3. what to replace with
+
+<br>
+
+```sql
+SELECT REPLACE('Hello, world', 'world', '$#!&'); -- Hello, $#!&
+ 
+SELECT REPLACE('cheese bread coffee milk', ' ', ' and '); -- cheese and bread and coffee and milk
+
+SELECT REPLACE('Hello World', 'l', '7'); -- He77o Wor7d  
+ 
+SELECT REPLACE('Hello World', 'o', '0'); -- Hell0 W0rld
+ 
+SELECT REPLACE('HellO World', 'o', '*'); -- HellO W*rld
+ 
+------------
+
+SELECT REPLACE(title, 'e ', '3') FROM books;
+ 
+SELECT REPLACE(title, ' ', '-') FROM books;
+```
+
+<br>
+
 ## REVERSE
 
 ## CHAR_LENGTH

@@ -2,14 +2,15 @@
 
 ## Databases
 
-- silos of information (data and table)
-- databases are separate
-
 [See types of databases](https://www.geeksforgeeks.org/dbms/types-of-databases/).
 
 ## Basic comands
 
 ```sql
+-- comment
+
+-- CTRL + L to clear terminal
+
 CREATE DATABASE <database>;   -- Creates a new database
 
 SHOW DATABASES;                -- Lists all databases available on the MySQL server
