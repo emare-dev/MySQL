@@ -163,7 +163,7 @@ SELECT SUBSTRING(title, 1, 10) AS 'short title' FROM books;
  
 -- get first character from author's last name
 
-SELECT SUBSTR(author_lname, 1, 1) AS initial, author_lname FROM BOOKS;
+SELECT SUBSTR(author_lname, 1, 1) AS initial, author_lname FROM books;
 
 +---------+----------------+
 | initial | author_lname   |
@@ -178,15 +178,42 @@ SELECT SUBSTR(author_lname, 1, 1) AS initial, author_lname FROM BOOKS;
 
 ## Combining string functions
 
-Combining `CONCAT()` and `SUBSTRING()`.
+Combining `CONCAT()` and `SUBSTRING()`
+
 
 ```sql
-SELECT CONCAT
-    (
-        SUBSTRING(title, 1, 10),
-        '...'
-    ) AS 'short title'
-FROM books;
+SELECT CONCAT(SUBSTR(title, 1, 10), '...') AS short_title FROM books;
+
++---------------+
+| short_title   |
++---------------+
+| The Namesa... |
+| Norse Myth... |
+| American G... |
++---------------+
+```
+
+<br>
+
+Combine authors' name and surname initials.
+
+```sql
+SELECT CONCAT(
+    SUBSTR(author_fname, 1, 1),
+    '.',
+    SUBSTR(author_lname, 1, 1),
+    '.'
+) AS author_initials
+FROM
+    books;
+
++-----------------+
+| author_initials |
++-----------------+
+| J.L.            |
+| N.G.            |
+| N.G.            |
++-----------------+
 ```
 
 <br>

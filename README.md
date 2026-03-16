@@ -598,3 +598,35 @@ SELECT * FROM unique_dogs;
 |      2 | Tina |   7 |
 +--------+------+-----+
 ```
+
+<br>
+
+## SQL FORMATTING
+
+```sql
+
+SELECT CONCAT(SUBSTR(title, 1, 10), '...') AS short_title FROM books;
+
+-- or
+
+SELECT CONCAT (
+        SUBSTRING(title, 1, 10),
+        '...'
+    ) AS 'short_title'
+FROM
+    books;
+
+
+
+SELECT 
+  CONCAT(
+    SUBSTR(title, 1, 10), 
+    '...'
+  ) AS short_title 
+FROM 
+  books;
+```
+
+<br>
+
+[SQL fromatter](https://codebeautify.org/sqlformatter)
