@@ -51,7 +51,51 @@ Alternative to copy-paste the code above:
 
 ## CONCAT
 
+Return concatenated string.
+
+### concat()
+
+Example: combining author first and last name to get a full name:
+
+    SELECT CONCAT(author_fname, ' ', author_lname) FROM books;
+
+    +-----------------------------------------+
+    | CONCAT(author_fname, ' ', author_lname) |
+    +-----------------------------------------+
+    | Jhumpa Lahiri                           |
+    | Neil Gaiman                             |                    |
+    +-----------------------------------------+
+
+Rename the column that we get: `CONCAT(author_fname, ' ', author_lname)`
+
+    SELECT CONCAT(author_fname, ' ', author_lname) AS author_fullname FROM books;
+
+    +----------------------+
+    | author_fullname      |
+    +----------------------+
+    | Jhumpa Lahiri        |
+    | Neil Gaiman          |
+    +----------------------+
+
+<br>
+
+### concat_ws()
+
+"Concat with separator"
+
+First argument (here: `-`) will be put between all other arguments.
+
+```bash
+SELECT
+  CONCAT_WS('-',title, author_fname, author_lname)
+FROM books;
+```
+
+<br>
+
 ## SUBSTRING
+
+
 
 ## Combining string functions
 
