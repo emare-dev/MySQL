@@ -19,7 +19,7 @@ Insert 3 people in one go:
 
 <br>
 
-```bash
+```sql
 # create table OWNERS
 CREATE TABLE owners (
     -> first_name VARCHAR(20),

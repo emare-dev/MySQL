@@ -9,7 +9,7 @@
 
 ## Basic comands
 
-```bash
+```sql
 CREATE DATABASE <database>;   -- Creates a new database
 
 SHOW DATABASES;                -- Lists all databases available on the MySQL server
@@ -23,7 +23,7 @@ DROP DATABASE database;   -- Permanently deletes the specified database and all 
 
 <br>
 
-```bash
+```sql
 
 CREATE TABLE cats (
     cat_id INT AUTO_INCREMENT,
@@ -106,7 +106,7 @@ plural nouns (most common)
 
 Example: shema following conventions
 
-```bash
+```sql
     CREATE DATABASE ecommerce_store;
 
     CREATE TABLE users (
@@ -255,7 +255,7 @@ VARCHAR    variable-length text (used most of the time)
 
 <br>
 
-```bash
+```sql
 CHAR(10)     â†’ "cat" stored as "cat       "
 VARCHAR(10)  â†’ "cat" stored as "cat"
 ```
@@ -268,7 +268,7 @@ VARCHAR(10)  â†’ "cat" stored as "cat"
 
 MySQL doesn't care about new lines, can be in one line.
 
-```bash
+```sql
     CREATE TABLE <tablename>
     (
         column_name data_type,
@@ -276,7 +276,7 @@ MySQL doesn't care about new lines, can be in one line.
     );
 ```
 
-```bash
+```sql
     CREATE TABLE cats
     (
         name varchar(100),
@@ -286,7 +286,7 @@ MySQL doesn't care about new lines, can be in one line.
 
 What it shows in Terminal:
 
-```bash
+```sql
     mysql> CREATE TABLE cats (
         -> name VARCHAR(50),
         -> age INT
@@ -298,7 +298,7 @@ What it shows in Terminal:
 
 Check the created tables:
 
-```bash
+```sql
     SHOW tables;
 
     // shows the same
@@ -324,7 +324,7 @@ To specifically drop the `cats` table:
 
 Re-create the `cats` table:
 
-```bash
+```sql
 CREATE TABLE cats (
     name VARCHAR(50),
     age INT
@@ -336,7 +336,7 @@ CREATE TABLE cats (
 Insert a cat in one line or in various lines.
 **The order matters** when you state which values you will add.
 
-```bash
+```sql
 INSERT INTO cats (name, age) VALUES ('Blue Steele', 5);
 
 INSERT INTO cats (name, age) 
@@ -346,7 +346,7 @@ VALUES           ('Jenkins',
 
 ### Multi-inserts
 
-```bash
+```sql
 INSERT INTO cats (name, age) 
 VALUES 
   ('Meatball', 5), 
@@ -361,7 +361,7 @@ VALUES
 See if the inserted values are in the table.
 `*` shows everything in the table.
 
-```bash
+```sql
 SELECT * FROM cats;
 ```
 
@@ -418,7 +418,7 @@ INSERT INTO cats() VALUES();
 
 To prevent from being able to not enter the information, this is how we create the table.
 
-```bash
+```sql
 CREATE TABLE dogs (
     name VARCHAR(50) NOT NULL,
     age INT NOT NULL
@@ -445,7 +445,7 @@ In previous table, there is **no default value**.
 
 Define a table with a `DEFAULT` name specified:
 
-```bash
+```sql
 CREATE TABLE birds (
     -> name VARCHAR(50) DEFAULT 'unknown',
     -> age INT DEFAULT 0
@@ -504,7 +504,7 @@ SELECT * FROM birds;
 +---------+------+
 ```
 
-```bash
+```sql
 CREATE TABLE fishes  (    
     name VARCHAR(20) NOT NULL DEFAULT 'unnamed',    
     age INT NOT NULL DEFAULT 99 
@@ -536,7 +536,7 @@ Unique IDs are added to rows so we can differentiate them for every made table =
 
 One way of specifying a PRIMARY KEY
 
-```bash
+```sql
 CREATE TABLE unique_cats (
 	cat_id INT NOT NUL PRIMARY KEY, # has to be there, has to be unique
     name VARCHAR(100) NOT NULL,
@@ -554,7 +554,7 @@ CREATE TABLE unique_cats (
 
 Another option:
 
-```bash
+```sql
 CREATE TABLE unique_dogs (
 	dog_id INT,
     name VARCHAR(100) NOT NULL,
@@ -570,7 +570,7 @@ CREATE TABLE unique_dogs (
 - use `AUTO_INCREMENT`
 - starts at `1`
 
-```bash
+```sql
 CREATE TABLE unique_cats3 (
     cat_id INT AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,

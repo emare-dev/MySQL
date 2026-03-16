@@ -21,7 +21,7 @@ How to retrieve, search and read data that is already in the table?
 One can select **every column** or just a **specific column**.
 Each time, **all the rows** are shown. 
 
-```bash
+```sql
 SELECT * FROM cats; -- Get all columns
 
 SELECT age FROM cats; -- Only get the age column
@@ -39,7 +39,7 @@ Specifies a **condition**.
 
 Can be used for selecting, updating and deleting rows.
 
-```bash
+```sql
 
 SELECT * FROM cats WHERE age = 4;
     
@@ -91,7 +91,7 @@ Used also for results that don't have a name.
 
 Use 'AS' to alias a column in your results (it doesn't actually change the name of the column in the table)
 
-```bash
+```sql
 -- instead of:
 
 SELECT cat_id, name FROM cats_new;
@@ -157,7 +157,7 @@ Update multiple fields at once:
 
     DELETE FROM <table> WHERE <condition>;
 
-```bash
+```sql
 DELETE FROM cats; -- Clears the whole table (deletes all rows in the cats table)
 
 DELETE FROM cats WHERE name='Egg'; -- Delete all cats with name of 'Egg'

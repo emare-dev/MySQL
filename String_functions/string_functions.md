@@ -4,7 +4,7 @@
 
 Data to work with:
 
-```bash
+```sql
 CREATE TABLE books 
 (
   book_id INT AUTO_INCREMENT,
@@ -85,7 +85,7 @@ Rename the column that we get: `CONCAT(author_fname, ' ', author_lname)`
 
 First argument (here: `-`) will be put between all other arguments.
 
-```bash
+```sql
 SELECT
   CONCAT_WS('-',title, author_fname, author_lname)
 FROM books;
@@ -95,9 +95,89 @@ FROM books;
 
 ## SUBSTRING
 
+Takes single larger string and returns a portion of it.
 
+Space counts!
+
+`SUBSTR()` is a synonim
+
+<br>
+
+
+```sql
+-- 'Hello World' - string we are taking from
+-- 1 - starting position
+-- 4 - length of the substring
+
+SELECT SUBSTRING('Hello World', 1, 4);
+
++--------------------------------+
+| SUBSTRING('Hello World', 1, 4) |
++--------------------------------+
+| Hell                           |
++--------------------------------+
+``` 
+
+<br>
+
+```sql 
+-- if there is no 2nd number, it goes untill the end
+
+SELECT SUBSTRING('Hello World', 7);
+
++------------------------------+
+| SUBSTRING('Hello, world', 7) |
++------------------------------+
+|  world                       |
++------------------------------+
+```
+
+```sql 
+-- negative num counts backwards from the end of the string
+
+SELECT SUBSTRING('Hello World', -3);
+
++-------------------------------+
+| SUBSTRING('Hello, world', -3) |
++-------------------------------+
+| rld                           |
++-------------------------------+
+```
+
+If you need the last character of the string, without knowing its length:
+
+    SELECT SUBSTRING('Hello World', -1);
+
+<br>
+
+```sql
+SELECT SUBSTRING(title, 1, 10) AS 'short title' FROM books;
+
++-------------+
+| short title |
++-------------+
+| The Namesa  |
+| Norse Myth  |
+| American G  |
++-------------+
+ 
+-- get first character from author's last name
+
+SELECT SUBSTR(author_lname, 1, 1), author_lname FROM BOOKS;
+
++----------------------------+----------------+
+| SUBSTR(author_lname, 1, 1) | author_lname   |
++----------------------------+----------------+
+| L                          | Lahiri         |
+| G                          | Gaiman         |
+| G                          | Gaiman         |
++----------------------------+----------------+
+```
+
+<br>
 
 ## Combining string functions
+<br>
 
 ## REPLACE
 

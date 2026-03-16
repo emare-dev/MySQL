@@ -9,7 +9,7 @@ Define an `Employees` table, with the following fields:
 - `age` - number, mandatory
 - `current_status` - text, mandatory, defaults to `employed`
 
-```bash
+```sql
 CREATE TABLE employees (
     employee_id INT AUTO_INCREMENT,
     last_name VARCHAR(50) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE employees (
 
 A test insert:
 
-```bash
+```sql
 INSERT INTO employees(first_name, last_name, age)
 VALUES('Johann', 'Sebastian', 30);
 INSERT INTO employees(first_name, last_name, age)
@@ -32,7 +32,7 @@ VALUES('Dora', 'Smith', 58);
 
 How the table looks:
 
-```bash
+```sql
 +-------------+-----------+------------+-------------+-----+----------------+
 | employee_id | last_name | first_name | middle_name | age | current_status |
 +-------------+-----------+------------+-------------+-----+----------------+

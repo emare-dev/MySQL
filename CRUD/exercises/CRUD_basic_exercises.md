@@ -2,7 +2,7 @@
 
 Data to work with:
 
-```bash
+```sql
 -- Create the new cats table:
 
 CREATE TABLE cats (
@@ -31,7 +31,7 @@ VALUES ('Ringo', 'Tabby', 4),
 
 Write the query that selects:
 
-```bash
+```sql
 -- cat_id for all the rows
 
 SELECT cat_id FROM cats_new;
