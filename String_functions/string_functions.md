@@ -254,8 +254,83 @@ SELECT REPLACE(title, ' ', '-') FROM books;
 
 ## REVERSE
 
+Takes provided string and reverses it.
+It is just once for that time you do it, doesn't make permanent change.
+
+```sql
+SELECT REVERSE('Hello World'); -- !dlrow ,olleH 
+
+SELECT REVERSE(NULL); -- NULL
+ 
+SELECT REVERSE('meow meow');
+ 
+SELECT REVERSE(author_fname) FROM books;
+ 
+SELECT CONCAT('woof', REVERSE('woof'));
+ 
+SELECT CONCAT(author_fname, REVERSE(author_fname)) FROM books;
+```
+
+<br>
+
 ## CHAR_LENGTH
+
+Tells the number of characters in a given string.
+
+Not the same as `LENGTH()`, which returns the length of the string as well, but in bytes.
+
+```sql
+SELECT CHAR_LENGTH('Hello World');
+ 
+SELECT CHAR_LENGTH(title) as length, title FROM books;
+
++--------+-----------------------------------------------------+
+| length | title                                               |
++--------+-----------------------------------------------------+
+|     12 | The Namesake                                        |
+|     15 | Norse Mythology                                     |
+|     13 | American Gods                                       |
++--------+-----------------------------------------------------+
+ 
+SELECT author_lname, CHAR_LENGTH(author_lname) AS 'length' FROM books;
+ 
+SELECT CONCAT(author_lname, ' is ', CHAR_LENGTH(author_lname), ' characters long') FROM books;
+```
+
+<br>
 
 ## UPPER & LOWER
 
+Synonyms:
+
+        UPPER() -> UCASE()
+
+        LOWER() -> LCASE()
+
+```sql
+SELECT UPPER('Hello World');
+ 
+SELECT LOWER('Hello World');
+ 
+SELECT UPPER(title) FROM books;
+ 
+SELECT CONCAT('MY FAVORITE BOOK IS ', UPPER(title)) FROM books;
+ 
+SELECT CONCAT('MY FAVORITE BOOK IS ', LOWER(title)) FROM books;
+
+SELECT CONCAT('I LOVE ', UPPER(title), ' !!!') FROM books;
+
++----------------------------------------------------------------+
+| CONCAT('I LOVE ', UPPER(title), ' !!!')                        |
++----------------------------------------------------------------+
+| I LOVE THE NAMESAKE !!!                                        |
+| I LOVE NORSE MYTHOLOGY !!!                                     |
+| I LOVE AMERICAN GODS !!!                                       |
++----------------------------------------------------------------+
+```
+
+<br>
+
 ## Other string functions
+
+<br>
