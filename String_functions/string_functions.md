@@ -333,4 +333,39 @@ SELECT CONCAT('I LOVE ', UPPER(title), ' !!!') FROM books;
 
 ## Other string functions
 
+```sql
+-- insert substring into a larger string
+-- 6 - at which position
+-- 0 - num of characters you want to replace
+
+SELECT INSERT('Hello Bobby', 6, 0, ' there,'); -- Hello there, Bobby
+
+SELECT INSERT('Hello Bobby', 7, 6, 'There'); --  Hello There                      
+ 
+-- get the leftmost or rightmost character from some string
+-- num - how many leftmost or rightmost characters we want to get
+
+SELECT LEFT('omghahalol!', 3); -- omg
+SELECT RIGHT('omghahalol!', 4); -- lol!
+ 
+SELECT LEFT(author_lname, 1) FROM books;
++-----------------------+
+| LEFT(author_lname, 1) |
++-----------------------+
+| L                     |
+| G                     |
+| G                     |
+| L                     |
++-----------------------+
+
+-- repeats a provided string the number of times provided
+
+SELECT REPEAT('ha', 4); -- hahahaha 
+
+-- used for removing leading or trailing spaces
+
+SELECT TRIM('  pickle  '); -- pickle
+```
+
+
 <br>
