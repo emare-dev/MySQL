@@ -2,7 +2,15 @@
 
 1. Reverse and uppercase the following sentence:
 
-    "Što je danas lijep i sunčan dan."
+    "Što je danas lijep i sunčan dan!"
+
+```sql
+SELECT REVERSE(UPPER('Što je danas lijep i sunčan dan!'));
+
+-- !NAD NAČNUS I PEJIL SANAD EJ OTŠ 
+```
+
+<br>
 
 2. What does this print out? 
 
@@ -14,9 +22,14 @@ SELECT
   ' ',
   '-'
   );
+
+-- I-like-cats
 ```
 
 3. Replace spaces in titles with '->' in `books` table. Name the column `title`.
+
+```sql
+SELECT REPLACE(title, ' ', '->') AS 'title' FROM books;
 
     +--------------------------------------------------------------+
     | title                                                        |
@@ -38,8 +51,14 @@ SELECT
     | Oblivion:->Stories                                           |
     | Consider->the->Lobster                                       |
     +--------------------------------------------------------------+
+```
+
+<br>
 
 4. Print this out! Don't forget to create aliases!
+
+```sql
+SELECT author_lname AS 'forwards', REVERSE(author_lname) AS 'backwards' FROM books;
 
     +----------------+----------------+
     | forwards       | backwards      |
@@ -62,8 +81,15 @@ SELECT
     | Foster Wallace | ecallaW retsoF |
     | Smith          | htimS          |
     +----------------+----------------+
+```
+
+<br>
 
 5. Print this out the same way, too!
+
+```sql
+SELECT UPPER(CONCAT(author_fname, ' ', author_lname)) AS 'full name
+in caps' FROM books;
 
     +----------------------+
     | full name in caps    |
@@ -86,8 +112,14 @@ SELECT
     | DAVID FOSTER WALLACE |
     | ADAM SMITH           |
     +----------------------+
+```
+
+<br>
 
 6. Make this happen! Take `title`, "was released in" + release year of each book and combine them.
+
+```sql
+SELECT CONCAT(title, ' was released in ', released_year) AS blurb FROM books;
 
     +--------------------------------------------------------------------------+
     | blurb                                                                    |
@@ -109,8 +141,14 @@ SELECT
     | Oblivion: Stories was released in 2004                                   |
     | Consider the Lobster was released in 2005                                |
     +--------------------------------------------------------------------------+
+```
+
+<br>
 
 7. Print the book titles in the length of each book title.
+
+```sql
+SELECT title AS 'title', CHAR_LENGTH(title) AS 'character count' FROM books;
 
     +-----------------------------------------------------+-----------------+
     | title                                               | character count |
@@ -132,11 +170,16 @@ SELECT
     | Oblivion: Stories                                   |              17 |
     | Consider the Lobster                                |              20 | 
     +-----------------------------------------------------+-----------------+
+```
+
+<br>
 
 8. Print out first 10 characters of all book titles and concatenate it with "...".
-    Then print author's with every author's last name + "," + last name.
+    Then print author's with every author's last name + "," + first name.
     Print stock quantity with "in stock" concatenated.
 
+```sql
+SELECT CONCAT(LEFT(title, 10), '...') AS 'short title', CONCAT(author_lname, ', ', author_fname) AS 'author', CONCAT(stock_quantity, ' in stock') AS 'quantity' FROM books;
 
     +---------------+-------------+--------------+
     | short title   | author      | quantity     |
@@ -144,3 +187,4 @@ SELECT
     | American G... | Gaiman,Neil | 12 in stock  |
     | A Heartbre... | Eggers,Dave | 104 in stock |
     +---------------+-------------+--------------+
+```
