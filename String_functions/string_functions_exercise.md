@@ -58,7 +58,10 @@ SELECT REPLACE(title, ' ', '->') AS 'title' FROM books;
 4. Print this out! Don't forget to create aliases!
 
 ```sql
-SELECT author_lname AS 'forwards', REVERSE(author_lname) AS 'backwards' FROM books;
+SELECT
+    author_lname AS 'forwards', REVERSE(author_lname) AS 'backwards'    
+FROM
+    books;
 
     +----------------+----------------+
     | forwards       | backwards      |
@@ -179,7 +182,12 @@ SELECT title AS 'title', CHAR_LENGTH(title) AS 'character count' FROM books;
     Print stock quantity with "in stock" concatenated.
 
 ```sql
-SELECT CONCAT(LEFT(title, 10), '...') AS 'short title', CONCAT(author_lname, ', ', author_fname) AS 'author', CONCAT(stock_quantity, ' in stock') AS 'quantity' FROM books;
+SELECT
+    CONCAT(LEFT(title, 10), '...') AS 'short title',
+    CONCAT(author_lname, ', ', author_fname) AS 'author', 
+    ONCAT(stock_quantity, ' in stock') AS 'quantity'
+FROM
+    books;
 
     +---------------+-------------+--------------+
     | short title   | author      | quantity     |
