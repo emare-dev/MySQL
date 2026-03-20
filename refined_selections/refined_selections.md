@@ -1,4 +1,4 @@
-# Advanced selections
+# Refined selections
 
 Narrowing, refining, manipulationg selections.
 
@@ -238,10 +238,18 @@ WHERE author_fname LIKE '_a_';
 ```
 <br>
 
-## 
+### Escaping wildcards
 
-<br>
+When you want to match a string with '%' sign, use `\`: LIKE '%\%%'`
 
-## 
+```sql
+-- To select books with '%' in their title:
+SELECT * FROM books
+WHERE title LIKE '%\%%';
+ 
+-- To select books with an underscore '_' in title:
+SELECT * FROM books
+WHERE title LIKE '%\_%';
+```
 
 <br>
