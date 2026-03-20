@@ -3,6 +3,8 @@
 1. Refine query that results in this output: print all book `title` that contains `stories`.
 
 ```sql
+SELECT title FROM books WHERE title LIKE '%stories%';
+
 +-----------------------------------------------------+
 | title                                               |
 +-----------------------------------------------------+
@@ -15,6 +17,8 @@
 2. Find the longest book. Print out the `page count` and `title`. Use sort and limit.
 
 ```sql
+SELECT title, pages FROM books ORDER BY pages DESC LIMIT 1;
+
 +-------------------------------------------+-------+
 | title                                     | pages |
 +-------------------------------------------+-------+
@@ -25,6 +29,12 @@
 3. Print a `summary` containing the title and year, for the 3 most recent books.
 
 ```sql
+SELECT
+  CONCAT(title, ' _ ', released_year) AS 'summary'
+  FROM books
+  ORDER BY released_year
+  DESC LIMIT 3;
+
 +-----------------------------+
 | summary                     |
 +-----------------------------+
@@ -37,6 +47,10 @@
 4. Find all books with an `author_lname` that contains a space(" ").
 
 ```sql
+SELECT title, author_lname 
+   FROM books
+   WHERE author_lname LIKE '% %';
+
 +----------------------+----------------+
 | title                | author_lname   |
 +----------------------+----------------+
@@ -48,6 +62,10 @@
 5. Find The 3 Books With The Lowest Stock. Select (print) `title`, `year`, and `stock`.
 
 ```sql
+ELECT title, released_year, stock_quantity
+  FROM books
+  ORDER BY stock_quantity LIMIT 3;
+
 +-----------------------------------------------------+---------------+----------------+
 | title                                               | released_year | stock_quantity |
 +-----------------------------------------------------+---------------+----------------+
@@ -60,6 +78,11 @@
 6. Print `title` and `author_lname`, sorted first by `author_lname` and then by `title`.
 
 ```sql
+SELECT title, author_lname
+  FROM books
+  ORDER BY author_lname, title;
+
+
 +-----------------------------------------------------+----------------+
 | title                                               | author_lname   |
 +-----------------------------------------------------+----------------+
@@ -88,6 +111,11 @@
 7. Make This Happen! Sorted Alphabetically By Last Name.
 
 ```sql
+SELECT 
+  CONCAT('MY FAVORITE AUTHOR IS', ' ', UPPER(author_fname), ' ', UPPER(author_lname)) AS yell
+  FROM books
+  ORDER BY author_lname;
+
 +---------------------------------------------+
 | yell                                        |
 +---------------------------------------------+

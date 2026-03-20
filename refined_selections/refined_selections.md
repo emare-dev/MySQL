@@ -4,6 +4,8 @@ Narrowing, refining, manipulationg selections.
 
 See [SELECT](https://dev.mysql.com/doc/refman/9.6/en/select.html) documentation.
 
+<br>
+
 ## DISTINCT
 
 Goes after `SELECT`, before a column name.
