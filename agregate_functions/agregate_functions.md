@@ -370,16 +370,59 @@ FROM books GROUP BY author_lname, author_fname;
 ## SUM
 
 ```sql
+-- summs all pages of the books in the entire table
 SELECT SUM(pages) FROM books;
  
- 
+-- sum all pages for each author
+SELECT author_lname, SUM(pages) FROM books GROUP BY author_lname;
+
+        +----------------+------------+
+        | author_lname   | SUM(pages) |
+        +----------------+------------+
+        | Lahiri         |        489 |
+        | Gaiman         |        977 |
+        | Eggers         |       1293 |
+        | Chabon         |        634 |
+        +----------------+------------+
+
+-- sum pages by author, count how many books there are
 SELECT author_lname, COUNT(*), SUM(pages)
 FROM books
 GROUP BY author_lname;
+
+-- will sum up to 0
+SELECT SUM(author_lname) FROM books;
 ```
 
 <br>
 
 ## AVG
 
+Can find average across all groups/data sets or group something and then find the average.
+
+```sql
+-- 
+SELECT AVG(pages) FROM books;
+ 
+-- finds average released year of all books
+SELECT AVG(released_year) FROM books;
+ 
+-- average stock quantity for all books released in the same year
+SELECT 
+    released_year, 
+    AVG(stock_quantity), 
+    COUNT(*) FROM books
+GROUP BY released_year;
+
+    +---------------+---------------------+----------+
+    | released_year | AVG(stock_quantity) | COUNT(*) |
+    +---------------+---------------------+----------+
+    |          2003 |             66.0000 |        2 |
+    |          2016 |             43.0000 |        1 |
+    |          2001 |            134.3333 |        3 |
+    |          1996 |             97.0000 |        1 |
+    |          2012 |            154.0000 |        1 |
+    |          2013 |             26.0000 |        1 |
+    +---------------+---------------------+----------+
+```
 <br>
