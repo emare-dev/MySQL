@@ -29,7 +29,7 @@ SELECT COUNT(*) FROM books; -- select number of rows from books
 -- counts every time a value is present in that coulmn
 SELECT COUNT(author_lname) FROM books;
  
--- 
+
 SELECT COUNT(DISTINCT author_lname) FROM books;
  
 +------------------------------+
@@ -401,7 +401,6 @@ SELECT SUM(author_lname) FROM books;
 Can find average across all groups/data sets or group something and then find the average.
 
 ```sql
--- 
 SELECT AVG(pages) FROM books;
  
 -- finds average released year of all books
