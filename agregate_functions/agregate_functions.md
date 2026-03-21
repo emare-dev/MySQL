@@ -12,7 +12,7 @@ Can operate on multiple rows and pieces of data at once
 
 Built in MySQL.
 
-Shows **how many values are in a column**
+Shows **how many values are in a column**.
 
 `DISTINCT` used for counting unique values (the ones that show multiple times only counted once).
 
@@ -220,13 +220,163 @@ WHERE released_year = (SELECT MIN(released_year) FROM books);
 
 ## Grouping by multiple columns 
 
+```sql
+-- group books by author, show how many books each author has
+SELECT author_fname, author_lname, COUNT(*) 
+FROM books 
+GROUP BY author_lname, author_fname;
+
+    +--------------+----------------+----------+
+    | author_fname | author_lname   | COUNT(*) |
+    +--------------+----------------+----------+
+    | Jhumpa       | Lahiri         |        2 |
+    | Neil         | Gaiman         |        3 |
+    | Dave         | Eggers         |        3 |
+    | Michael      | Chabon         |        1 |
+    | Patti        | Smith          |        1 |
+    | Raymond      | Carver         |        2 |
+    | Don          | DeLillo        |        1 |
+    | John         | Steinbeck      |        1 |
+    | David        | Foster Wallace |        2 |
+    | Dan          | Harris         |        1 |
+    | Freida       | Harris         |        1 |
+    | George       | Saunders       |        1 |
+    | NULL         | NULL           |        1 |
+    +--------------+----------------+----------+
+ 
+ 
+SELECT CONCAT(author_fname, ' ', author_lname) AS author,  COUNT(*)
+FROM books
+GROUP BY author;
+
+    +----------------------+----------+
+    | author               | COUNT(*) |
+    +----------------------+----------+
+    | Jhumpa Lahiri        |        2 |
+    | Neil Gaiman          |        3 |
+    | Dave Eggers          |        3 |
+    | Michael Chabon       |        1 |
+    | Patti Smith          |        1 |
+    | Raymond Carver       |        2 |
+    | Don DeLillo          |        1 |
+    | John Steinbeck       |        1 |
+    | David Foster Wallace |        2 |
+    | Dan Harris           |        1 |
+    | Freida Harris        |        1 |
+    | George Saunders      |        1 |
+    | NULL                 |        1 |
+    +----------------------+----------+
+```
+
 <br>
 
 ## MIN and MAX with GROUP BY
 
+```sql
+-- find the year each author publiched their first book
+-- group all the books by the same author together and then find the minimum year for that author
+SELECT author_lname, MIN(released_year) FROM books GROUP BY author_lname;
+ 
+        +----------------+--------------------+
+        | author_lname   | MIN(released_year) |
+        +----------------+--------------------+
+        | Lahiri         |               1996 |
+        | Gaiman         |               2001 |
+        | Eggers         |               2001 |
+        | Chabon         |               2000 |
+        | Smith          |               2010 |
+        | Carver         |               1981 |
+        | DeLillo        |               1985 |
+        | Steinbeck      |               1945 |
+        | Foster Wallace |               2004 |
+        | Harris         |               2001 |
+        | Saunders       |               2017 |
+        | NULL           |               NULL |
+        +----------------+--------------------+
+
+SELECT author_lname, MAX(released_year), MIN(released_year) FROM books GROUP BY author_lname;
+
+        +----------------+--------------------+--------------------+
+        | author_lname   | MIN(released_year) | MAX(released_year) |
+        +----------------+--------------------+--------------------+
+        | Lahiri         |               1996 |               2003 |
+        | Gaiman         |               2001 |               2016 |
+        | Eggers         |               2001 |               2013 |
+        | Chabon         |               2000 |               2000 |
+        | Smith          |               2010 |               2010 |
+        | Carver         |               1981 |               1989 |
+        | DeLillo        |               1985 |               1985 |
+        | Steinbeck      |               1945 |               1945 |
+        | Foster Wallace |               2004 |               2005 |
+        | Harris         |               2001 |               2014 |
+        | Saunders       |               2017 |               2017 |
+        | NULL           |               NULL |               NULL |
+        +----------------+--------------------+--------------------+
+ 
+
+SELECT 
+	author_lname, 
+	COUNT(*) as books_written, 
+	MAX(released_year) AS latest_release,
+	MIN(released_year)  AS earliest_release,
+      MAX(pages) AS longest_page_count
+FROM books GROUP BY author_lname;
+
+        +----------------+---------------+----------------+------------------+--------------------+
+        | author_lname   | books_written | latest_release | earliest_release | longest_page_count |
+        +----------------+---------------+----------------+------------------+--------------------+
+        | Lahiri         |             2 |           2003 |             1996 |                291 |
+        | Gaiman         |             3 |           2016 |             2001 |                465 |
+        | Eggers         |             3 |           2013 |             2001 |                504 |
+        | Chabon         |             1 |           2000 |             2000 |                634 |
+        | Smith          |             1 |           2010 |             2010 |                304 |
+        | Carver         |             2 |           1989 |             1981 |                526 |
+        | DeLillo        |             1 |           1985 |             1985 |                320 |
+        | Steinbeck      |             1 |           1945 |             1945 |                181 |
+        | Foster Wallace |             2 |           2005 |             2004 |                343 |
+        | Harris         |             2 |           2014 |             2001 |                428 |
+        | Saunders       |             1 |           2017 |             2017 |                367 |
+        | NULL           |             1 |           NULL |             NULL |                634 |
+        +----------------+---------------+----------------+------------------+--------------------+
+
+
+SELECT 
+	author_lname, author_fname,
+	COUNT(*) as books_written, 
+	MAX(released_year) AS latest_release,
+	MIN(released_year)  AS earliest_release
+FROM books GROUP BY author_lname, author_fname;
+
++----------------+--------------+---------------+----------------+------------------+
+| author_lname   | author_fname | books_written | latest_release | earliest_release |
++----------------+--------------+---------------+----------------+------------------+
+| Lahiri         | Jhumpa       |             2 |           2003 |             1996 |
+| Gaiman         | Neil         |             3 |           2016 |             2001 |
+| Eggers         | Dave         |             3 |           2013 |             2001 |
+| Chabon         | Michael      |             1 |           2000 |             2000 |
+| Smith          | Patti        |             1 |           2010 |             2010 |
+| Carver         | Raymond      |             2 |           1989 |             1981 |
+| DeLillo        | Don          |             1 |           1985 |             1985 |
+| Steinbeck      | John         |             1 |           1945 |             1945 |
+| Foster Wallace | David        |             2 |           2005 |             2004 |
+| Harris         | Dan          |             1 |           2014 |             2014 |
+| Harris         | Freida       |             1 |           2001 |             2001 |
+| Saunders       | George       |             1 |           2017 |             2017 |
++----------------+--------------+---------------+----------------+------------------+
+```
+
 <br>
 
 ## SUM
+
+```sql
+SELECT SUM(pages) FROM books;
+ 
+ 
+SELECT author_lname, COUNT(*), SUM(pages)
+FROM books
+GROUP BY author_lname;
+```
 
 <br>
 
