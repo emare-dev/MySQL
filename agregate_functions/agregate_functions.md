@@ -155,15 +155,66 @@ SELECT * FROM books GROUP BY author_lname; -- gives an error; option to change S
 
 ## MIN and MAX basics
 
+- `MIN()` find a minimum value in a column or group
+
+- `MAX()` find a maximum value in a column or group
+
+Usually used for numerical values.
+
+<br>
+
 ```sql
+-- find minimum released year
+SELECT MIN(released_year) FROM books;
+
+-- find the most number of pages
 SELECT MAX(pages) FROM books;
  
-SELECT MIN(author_lname) FROM books;
+-- MIN and MAX combined
+SELECT MIN(author_lname), MAX(author_lname) FROM books;
++-------------------+-------------------+
+| MIN(author_lname) | MAX(author_lname) |
++-------------------+-------------------+
+| Carver            | Steinbeck         |
++-------------------+-------------------+
+
 ```
 
 <br>
 
 ## Subqueries
+
+They evaluate first, then the rest of the expression.
+
+```sql
+-- get the title of the longest book if I don't know the exact number of pages
+SELECT title, pages FROM books
+ORDER BY pages DESC LIMIT 1;
+
+-- option with SUBQUERY
+-- if there is a duplicate of same num of pages, it will print it, too
+SELECT title, pages FROM books
+WHERE pages = (SELECT MAX(pages) FROM books);
+
+        +-------------------------------------------+-------+
+        | title                                     | pages |
+        +-------------------------------------------+-------+
+        | The Amazing Adventures of Kavalier & Clay |   634 |
+        +-------------------------------------------+-------+
+
+
+-- find the title of the book that was released earliest
+SELECT MIN(released_year) FROM books;
+ 
+SELECT title, released_year FROM books 
+WHERE released_year = (SELECT MIN(released_year) FROM books);
+
+        +-------------+---------------+
+        | title       | released_year |
+        +-------------+---------------+
+        | Cannery Row |          1945 |
+        +-------------+---------------+
+```
 
 <br>
 
