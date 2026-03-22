@@ -2,7 +2,14 @@
 
 Narrowing, refining, manipulationg selections.
 
-See [SELECT](https://dev.mysql.com/doc/refman/9.6/en/select.html) documentation.
+- [DISTINCT](#distinct)
+- [ORDER BY](#order-by)
+- [LIMIT](#limit)
+- [LIKE](#like)
+
+<br>
+
+[SELECT documentation](https://dev.mysql.com/doc/refman/9.6/en/select.html)
 
 <br>
 
