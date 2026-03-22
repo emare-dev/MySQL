@@ -1,6 +1,20 @@
 # String functions
 
+- [CONCAT](#concat)
+- [SUBSTRING](#substring)
+- [COMBINING STRING FUNCTIONS](#combining-string-functions)
+- [REPLACE](#replace)
+- [REVERSE](#reverse)
+- [CHAR LENGTH](#char_length)
+- [UPPER AND LOWER](#upper--lower)
+- [OTHER STRING FUNCTIONS](#other-string-functions)
+
+
+<br>
+
 [DOCUMENTATION: String functions and operators](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)
+
+<br>
 
 Data to work with:
 
