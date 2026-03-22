@@ -4,6 +4,20 @@ Different ways of performing analysis on data.
 
 Can operate on multiple rows and pieces of data at once
 
+<br>
+
+- [COUNT BASICS](#count-basics)
+- [GROUP BY](#group-by)
+- [MIN AND MAX BASICS](#min-and-max-basics)
+- [SUBQUERIES](#subqueries)
+- [GROUP BY MULTIPLE COLUMNS](#grouping-by-multiple-columns)
+- [MIN AND MAX WITH GROUP BY](#min-and-max-with-group-by)
+- [SUM](#sum)
+- [AVG](#avg)
+
+
+<br>
+
 [Agregate functions docs](https://dev.mysql.com/doc/refman/8.4/en/aggregate-functions.html)
 
 <br>
@@ -182,7 +196,7 @@ SELECT MIN(author_lname), MAX(author_lname) FROM books;
 
 <br>
 
-## Subqueries
+## SUBQUERIES
 
 They evaluate first, then the rest of the expression.
 
