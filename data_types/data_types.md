@@ -85,13 +85,60 @@ Double takes 2x more space than float.
 
 ## WORKING WITH DATES
 
+```sql
+CREATE TABLE people (
+	name VARCHAR(100),
+    birthdate DATE,
+    birthtime TIME,
+    birthdt DATETIME
+);
+ 
+INSERT INTO people (name, birthdate, birthtime, birthdatetime)
+VALUES ('Elton', '2000-12-25', '11:00:00', '2000-12-25 11:00:00');
+ 
+INSERT INTO people (name, birthdate, birthtime, birthdatetime)
+VALUES ('Lulu', '1985-04-11', '9:45:10', '1985-04-11 9:45:10');
+ 
+INSERT INTO people (name, birthdate, birthtime, birthdatetime)
+VALUES ('Juan', '2020-08-15', '23:59:00', '2020-08-15 23:59:00');
+```
+
 <br>
 
 ## CURDATE, CURTIME, NOW
 
+Get actual curent date/time dynamically.
+
+```sql
+SELECT CURTIME();
+ 
+SELECT CURDATE();
+ 
+-- short for CURRENT_TIMESTAMPE()
+SELECT NOW(); -- 2026-03-22 21:04:29
+ 
+INSERT INTO people (name, birthdate, birthtime, birthdatetime)
+VALUES ('Hazel', CURDATE(), CURTIME(), NOW());
+```
+
 <br>
 
 ## DATE FUNCTIONS
+
+```sql
+SELECT 
+    birthdate,
+    DAY(birthdate),
+    DAYOFWEEK(birthdate),
+    DAYOFYEAR(birthdate)
+FROM people;
+ 
+SELECT 
+    birthdate,
+    MONTHNAME(birthdate),
+    YEAR(birthdate)
+FROM people;
+```
 
 <br>
 
