@@ -1,5 +1,7 @@
 # CRUD basics
 
+4 basic actions done with data.
+
 C - create
 
 R - read
@@ -8,7 +10,16 @@ U - update
 
 D - delete
 
-4 basic actions done with data.
+<br>
+
+- [READING](#r---reading)
+- [SELECT](#select)
+- [WHERE](#where)
+- [ALIASES](#aliases)
+- [UPDATE](#u---update)
+- [DELETE](#d---delete)
+
+<br>
 
 ## R - READING 
 
