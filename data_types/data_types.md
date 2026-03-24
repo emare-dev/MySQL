@@ -192,9 +192,117 @@ FROM people;
 
 ## TIME FUNCTIONS
 
+Getting the minute or hour from a time.
+It is SINGULAR.
+
+```sql
+SELECT 
+    birthtime,
+    HOUR(birthtime),
+    MINUTE(birthtime)
+FROM people;
+
++-----------+-----------------+-------------------+
+| birthtime | HOUR(birthtime) | MINUTE(birthtime) |
++-----------+-----------------+-------------------+
+| 11:00:00  |              11 |                 0 |
+| 09:45:10  |               9 |                45 |
+| 23:59:00  |              23 |                59 |
+| 21:05:00  |              21 |                 5 |
++-----------+-----------------+-------------------+
+ 
+
+SELECT 
+    birthdatetime,
+    MONTH(birthdatetime),
+    DAY(birthdatetime),
+    HOUR(birthdatetime),
+    MINUTE(birthdatetime)
+FROM people;
+
++---------------------+----------------------+--------------------+---------------------+-----------------------+
+| birthdatetime       | MONTH(birthdatetime) | DAY(birthdatetime) | HOUR(birthdatetime) | MINUTE(birthdatetime) |
++---------------------+----------------------+--------------------+---------------------+-----------------------+
+| 2000-12-25 11:00:00 |                   12 |                 25 |                  11 |                     0 |
+| 1985-04-11 09:45:10 |                    4 |                 11 |                   9 |                    45 |
+| 2020-08-15 23:59:00 |                    8 |                 15 |                  23 |                    59 |
+| 2026-03-22 21:05:00 |                    3 |                 22 |                  21 |                     5 |
++---------------------+----------------------+--------------------+---------------------+-----------------------+
+```
+
 <br>
 
 ## FORMATTING DATES
+
+How to get this format: `April 11, 1989`
+
+```sql
+SELECT MONTHNAME(birthdate), DAY(birthdate), YEAR(birthdate) FROM people;
+
++----------------------+----------------+-----------------+
+| MONTHNAME(birthdate) | DAY(birthdate) | YEAR(birthdate) |
++----------------------+----------------+-----------------+
+| December             |             25 |            2000 |
+| April                |             11 |            1985 |
+| August               |             15 |            2020 |
+| March                |             22 |            2026 |
++----------------------+----------------+-----------------+
+```
+
+Better way: `DATE_FORMAT(birthdate, format string)`
+
+We are passing [specifier characters/sequences](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format) as arguments.
+
+<br>
+
+```sql
+SELECT DATE_FORMAT(birthdate, '%b') FROM people;
+
++------------------------------+
+| DATE_FORMAT(birthdate, '%b') |
++------------------------------+
+| Dec                          |
+| Apr                          |
+| Aug                          |
+| Mar                          |
++------------------------------+
+
+
+SELECT birthdate, DATE_FORMAT(birthdate, '%a %b %D') FROM people;
+
++------------+------------------------------------+
+| birthdate  | DATE_FORMAT(birthdate, '%a %b %D') |
++------------+------------------------------------+
+| 2000-12-25 | Mon Dec 25th                       |
+| 1985-04-11 | Thu Apr 11th                       |
+| 2020-08-15 | Sat Aug 15th                       |
+| 2026-03-22 | Sun Mar 22nd                       |
++------------+------------------------------------+
+ 
+
+SELECT birthdatetime, DATE_FORMAT(birthdatetime, '%H:%i') FROM people;
+
++---------------------+-------------------------------------+
+| birthdatetime       | DATE_FORMAT(birthdatetime, '%H:%i') |
++---------------------+-------------------------------------+
+| 2000-12-25 11:00:00 | 11:00                               |
+| 1985-04-11 09:45:10 | 09:45                               |
+| 2020-08-15 23:59:00 | 23:59                               |
+| 2026-03-22 21:05:00 | 21:05                               |
++---------------------+-------------------------------------+
+ 
+
+SELECT birthdatetime, DATE_FORMAT(birthdatetime, 'BORN ON: %r') FROM people;
+
++---------------------+-------------------------------------------+
+| birthdatetime       | DATE_FORMAT(birthdatetime, 'BORN ON: %r') |
++---------------------+-------------------------------------------+
+| 2000-12-25 11:00:00 | BORN ON: 11:00:00 AM                      |
+| 1985-04-11 09:45:10 | BORN ON: 09:45:10 AM                      |
+| 2020-08-15 23:59:00 | BORN ON: 11:59:00 PM                      |
+| 2026-03-22 21:05:00 | BORN ON: 09:05:00 PM                      |
++---------------------+-------------------------------------------+
+```
 
 <br>
 
