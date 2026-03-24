@@ -125,19 +125,67 @@ VALUES ('Hazel', CURDATE(), CURTIME(), NOW());
 
 ## DATE FUNCTIONS
 
+Formatting dates or extracting date into a different format.
+
+`DAY()` synonsm for `DAYOFMONTH()` 
+
 ```sql
+SELECT birthdate, DAY(birthdate) FROM people;
+
++------------+----------------+
+| birthdate  | DAY(birthdate) |
++------------+----------------+
+| 2000-12-25 |             25 |
+| 1985-04-11 |             11 |
+| 2020-08-15 |             15 |
+| 2026-03-22 |             22 |
++------------+----------------+
+
+
+SELECT birthdate, DAY(birthdate), DAYOFWEEK(birthdate) FROM people;
+
++------------+----------------+----------------------+
+| birthdate  | DAY(birthdate) | DAYOFWEEK(birthdate) |
++------------+----------------+----------------------+
+| 2000-12-25 |             25 |                    2 |
+| 1985-04-11 |             11 |                    5 |
+| 2020-08-15 |             15 |                    7 |
+| 2026-03-22 |             22 |                    1 |
++------------+----------------+----------------------+
+
+
+
 SELECT 
     birthdate,
     DAY(birthdate),
     DAYOFWEEK(birthdate),
     DAYOFYEAR(birthdate)
 FROM people;
+
++------------+----------------+----------------------+----------------------+
+| birthdate  | DAY(birthdate) | DAYOFWEEK(birthdate) | DAYOFYEAR(birthdate) |
++------------+----------------+----------------------+----------------------+
+| 2000-12-25 |             25 |                    2 |                  360 |
+| 1985-04-11 |             11 |                    5 |                  101 |
+| 2020-08-15 |             15 |                    7 |                  228 |
+| 2026-03-22 |             22 |                    1 |                   81 |
++------------+----------------+----------------------+----------------------+
+
  
 SELECT 
     birthdate,
     MONTHNAME(birthdate),
     YEAR(birthdate)
 FROM people;
+
++------------+----------------------+-----------------+
+| birthdate  | MONTHNAME(birthdate) | YEAR(birthdate) |
++------------+----------------------+-----------------+
+| 2000-12-25 | December             |            2000 |
+| 1985-04-11 | April                |            1985 |
+| 2020-08-15 | August               |            2020 |
+| 2026-03-22 | March                |            2026 |
++------------+----------------------+-----------------+
 ```
 
 <br>
