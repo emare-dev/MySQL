@@ -308,6 +308,106 @@ SELECT birthdatetime, DATE_FORMAT(birthdatetime, 'BORN ON: %r') FROM people;
 
 ## DATE MATH
 
+Built-in math functions for date.
+
+1. `DATEDIFF(1, 2)` - substracts 2 expression from the 1 and returns num of **days**
+
+
+    // How many days have passed from a birthday?
+    SELECT CURDATE() FROM people;
+    SELECT birthdate, DATEDIFF(CURDATE(), birthdate) FROM people;
+
+    +------------+--------------------------------+
+    | birthdate  | DATEDIFF(CURDATE(), birthdate) |
+    +------------+--------------------------------+
+    | 2000-12-25 |                           9222 |
+    | 1985-04-11 |                          14959 |
+    | 2020-08-15 |                           2049 |
+    | 2026-03-22 |                              4 |
+    +------------+--------------------------------+
+
+Do math with some interval (second, minute, day, month...): 
+
+2. `DATE_ADD(date, INTERVAL expression)`
+3. `DATE_SUB()`
+
+[documentation](https://dev.mysql.com/doc/refman/8.4/en/date-and-time-functions.html#function_date-add)
+
+```sql
+SELECT DATE_ADD('2018-05-01',INTERVAL 1 DAY); -- 2018-05-02
+SELECT DATE_SUB('2018-05-01',INTERVAL 1 YEAR); --2017-05-01
+
+SELECT DATE_ADD(CURDATE(), INTERVAL 1 YEAR);
+
++--------------------------------------+
+| DATE_ADD(CURDATE(), INTERVAL 1 YEAR) |
++--------------------------------------+
+| 2027-03-26                           |
++--------------------------------------+
+
+
+SELECT DATE_SUB(CURDATE(), INTERVAL 12 YEAR);
++---------------------------------------+
+| DATE_SUB(CURDATE(), INTERVAL 12 YEAR) |
++---------------------------------------+
+| 2014-03-26                            |
++---------------------------------------+
+
+-- When will they have their 18th birthday
+SELECT birthdate, DATE_ADD(birthdate, INTERVAL 18 YEAR) FROM people;
+
++------------+---------------------------------------+
+| birthdate  | DATE_ADD(birthdate, INTERVAL 18 YEAR) |
++------------+---------------------------------------+
+| 2000-12-25 | 2018-12-25                            |
+| 1985-04-11 | 2003-04-11                            |
+| 2020-08-15 | 2038-08-15                            |
+| 2026-03-22 | 2044-03-22                            |
++------------+---------------------------------------+
+```
+
+<br>
+
+4. `TIMEDIFF()` returns time value when it subtracts 2 different time values
+
+```sql
+SELECT TIMEDIFF(CURTIME(), '07:00:00');
+
++---------------------------------+
+| TIMEDIFF(CURTIME(), '07:00:00') |
++---------------------------------+
+| 14:58:23                        |
++---------------------------------+
+```
+
+<br>
+
+### Use `+` and `-` operators
+
+```sql
+SELECT NOW() - INTERVAL 18 YEAR;
+
++--------------------------+
+| NOW() - INTERVAL 18 YEAR |
++--------------------------+
+| 2008-03-26 22:00:00      |
++--------------------------+
+
+-- check if someone is 18 years old
+SELECT name, birthdate, birthdate + INTERVAL 18 YEAR AS will_be_21 FROM people;
+
++-------+------------+------------+
+| name  | birthdate  | will_be_21 |
++-------+------------+------------+
+| Elton | 2000-12-25 | 2018-12-25 |
+| Lulu  | 1985-04-11 | 2003-04-11 |
+| Juan  | 2020-08-15 | 2038-08-15 |
+| Hazel | 2026-03-22 | 2044-03-22 |
++-------+------------+------------+
+
+```
+
+
 <br>
 
 ## TIMESTAMPS
