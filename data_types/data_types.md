@@ -407,13 +407,74 @@ SELECT name, birthdate, birthdate + INTERVAL 18 YEAR AS will_be_21 FROM people;
 
 ```
 
-
 <br>
 
 ## TIMESTAMPS
 
+[Date, time and timestamps data type](https://dev.mysql.com/doc/refman/9.6/en/datetime.html#:~:text=MySQL%20retrieves%20and%20displays%20DATETIME,%3A14%3A07'%20UTC.)
+
+- a data type
+- `timestamp` combines date and time
+- takes up less storage
+- support a much smaller range of dates from `datetime`
+- `NOW()` works with `timestamp`
+
+```sql
+SELECT TIMESTAMP('2026-03-26 22:10:57');
+
++----------------------------------+
+| TIMESTAMP('2026-03-26 22:10:57') |
++----------------------------------+
+| 2026-03-26 22:10:57              |
+```
+
 <br>
 
 ## DEFAULT AND ON UPDATE TIMESTAMPS
+
+```sql
+CREATE TABLE captions (
+  text VARCHAR(150),
+  created_at TIMESTAMP default CURRENT_TIMESTAMP
+);
+ 
+INSERT INTO captions (text) VALUES ('lovely day');
+INSERT INTO captions (text) VALUES ('good night');
+
++------------+---------------------+
+| text       | created_at          |
++------------+---------------------+
+| lovely day | 2026-03-26 22:14:43 |
+| good night | 2026-03-26 22:14:50 |
++------------+---------------------+
+```
+
+### `ON UPDATE`
+
+Updates a column to a current timestamp whenever something is changed in a row.
+
+```sql
+CREATE TABLE captions2 (
+  text VARCHAR(150),
+  created_at TIMESTAMP default CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- will automatically have timestamp set to current date when a row is changed
+);
+
+INSERT INTO captions2 VALUE ('I am tired');
+
++------------+---------------------+------------+
+| text       | created_at          | updated_at |
++------------+---------------------+------------+
+| I am tired | 2026-03-26 22:18:10 | NULL       |
++------------+---------------------+------------+
+
+UPDATE captions2 SET text="I said, I AM TIRED!!!";
+
++-----------------------+---------------------+---------------------+
+| text                  | created_at          | updated_at          |
++-----------------------+---------------------+---------------------+
+| I said, I AM TIRED!!! | 2026-03-26 22:18:10 | 2026-03-26 22:19:12 |
++-----------------------+---------------------+---------------------+
+```
 
 <br>
