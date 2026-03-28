@@ -79,14 +79,35 @@ WHERE released_year <= 1985;
 ### Logical AND 
 
 ```sql
+-- select all books published by D. Eggers published after 2010
 SELECT title, author_lname, released_year FROM books
 WHERE released_year > 2010
 AND author_lname = 'Eggers';
  
+-- select all books published by D. Eggers published after 2010 and the title contains the word "novel"
 SELECT title, author_lname, released_year FROM books
 WHERE released_year > 2010
 AND author_lname = 'Eggers'
 AND title LIKE '%novel%';
+
+-- find books with title that is at least 15 characters long and has a large number of pages
+
+-- 1. books with long titles
+SELECT title FROM books WHERE CHAR_LENGTH(title) > 30;
+
+-- 2. long books
+SELECT title FROM books WHERE pages > 500;
+
+SELECT title, pages FROM books
+    -> WHERE pages > 500
+    -> AND CHAR_LENGTH(title) > 30;
+
++-------------------------------------------+-------+
+| title                                     | pages |
++-------------------------------------------+-------+
+| The Amazing Adventures of Kavalier & Clay |   634 |
+| Where I'm Calling From: Selected Stories  |   526 |
++-------------------------------------------+-------+
 ```
 
 <br>
@@ -101,12 +122,30 @@ AND pages > 500;
 SELECT title, author_lname FROM books
 WHERE author_lname='Eggers' AND
 released_year > 2010;
+
++----------------------------------+--------------+
+| title                            | author_lname |
++----------------------------------+--------------+
+| A Hologram for the King: A Novel | Eggers       |
+| The Circle                       | Eggers       |
++----------------------------------+--------------+
  
 SELECT title, author_lname, released_year FROM books
 WHERE author_lname='Eggers' OR
 released_year > 2010;
+
++-------------------------------------------+--------------+---------------+
+| title                                     | author_lname | released_year |
++-------------------------------------------+--------------+---------------+
+| Norse Mythology                           | Gaiman       |          2016 |
+| A Hologram for the King: A Novel          | Eggers       |          2012 |
+| The Circle                                | Eggers       |          2013 |
+| A Heartbreaking Work of Staggering Genius | Eggers       |          2001 |
+| 10% Happier                               | Harris       |          2014 |
+| Lincoln In The Bardo                      | Saunders     |          2017 |
++-------------------------------------------+--------------+---------------+
  
- 
+-- select books that are short or short stories
 SELECT title, pages FROM books
 WHERE pages < 200 
 OR title LIKE '%stories%';
